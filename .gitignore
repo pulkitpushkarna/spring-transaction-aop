@@ -3,8 +3,6 @@
 .project
 *.gradle
 .gradle
-*.gradle/
-.gradle/
 *.class
 *.ipr
 *.iws
