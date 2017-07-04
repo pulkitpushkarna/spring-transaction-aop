@@ -23,5 +23,13 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="employeeService" class="com.spring.demo.EmployeeService">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+        <property name="employeeService2" ref="employeeService2"/>
+    </bean>
 
+    <bean id="employeeService2" class="com.spring.demo.EmployeeService2">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+
+    </bean>
 </beans>

@@ -2,6 +2,7 @@ package com.spring.demo;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,21 +30,32 @@ public class EmployeeService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+
+    @Transactional(propagation = Propagation.REQUIRED, timeout = 3)
     public void insertEmployee() throws InterruptedException {
+        Thread.sleep(5000);
         String sql = "INSERT INTO Employee (name,age)VALUES(?,?)";
         jdbcTemplate.update(sql, new Object[]{"Peter",27});
         try {
             employeeService2.insertEmployee();
-
-        }catch (Exception e) {
+        }catch (Exception ex){
 
         }
-        try {
 
+        try {
             employeeService2.insertEmployee2();
-        }catch (Exception e) {
+        }catch (Exception ex){
 
         }
     }
+
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    public void readEmployee() throws InterruptedException {
+        Thread.sleep(2000);
+        String sql = "SELECT * FROM Employee WHERE age = ?";
+        System.out.println(jdbcTemplate.queryForMap(sql, new Object[]{29}));
+
+    }
+
+
 }
