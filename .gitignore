@@ -1,8 +1,6 @@
 *.idea
 .classpath
 .project
-*.gradle
-.gradle
 *.class
 *.ipr
 *.iws
