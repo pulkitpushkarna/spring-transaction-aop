@@ -31,7 +31,7 @@ public class EmployeeService {
     }
 
 
-    @Transactional(propagation = Propagation.REQUIRED, timeout = 3)
+    @Transactional
     public void insertEmployee() throws InterruptedException {
         Thread.sleep(5000);
         String sql = "INSERT INTO Employee (name,age)VALUES(?,?)";
@@ -39,13 +39,13 @@ public class EmployeeService {
         try {
             employeeService2.insertEmployee();
         }catch (Exception ex){
-
+            ex.printStackTrace();
         }
 
         try {
             employeeService2.insertEmployee2();
         }catch (Exception ex){
-
+            ex.printStackTrace();
         }
     }
 

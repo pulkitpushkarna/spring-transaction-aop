@@ -20,18 +20,17 @@ public class EmployeeService2 {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional
     public void insertEmployee(){
         String sql = "INSERT INTO Employee (name,age)VALUES(?,?)";
         jdbcTemplate.update(sql, new Object[]{"Peter2",29});
         throw new RuntimeException();
     }
 
-    @Transactional(timeout = 3)
-    public void insertEmployee2() throws InterruptedException {
+    @Transactional
+    public void insertEmployee2(){
         String sql = "INSERT INTO Employee (name,age)VALUES(?,?)";
         jdbcTemplate.update(sql, new Object[]{"Peter3",27});
-        Thread.sleep(5000);
 
     }
 
